@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+* {
+  cursor: none; /* Hide the default cursor */
+}
+
+.custom-cursor {
+  cursor: none;
+  position: fixed;
+  pointer-events: none; /* Ensures the cursor doesn't interfere with clicking */
+  z-index: 50; /* Keep it above other elements */
+}
