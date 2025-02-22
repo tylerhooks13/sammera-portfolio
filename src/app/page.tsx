@@ -1,16 +1,8 @@
 "use client";
 import { Inter } from "next/font/google";
 import { useRef } from "react";
-import { HeroSection } from "./components/HeroSection/HeroSecttion";
+import { HeroSection } from "./components/HeroSection/HeroSection";
 import Biography from "./components/Biography/Biography";
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-  weight: ["400", "600"],
-  style: ["normal", "italic"],
-});
 
 export default function Home() {
   const biographyRef = useRef<HTMLElement>(null);
