@@ -8,6 +8,7 @@ const inter = Inter({
   display: "swap", // Optimize font loading
   variable: "--font-inter", // Create a CSS variable
   weight: ["400", "600"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
