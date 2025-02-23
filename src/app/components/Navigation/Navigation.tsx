@@ -30,7 +30,7 @@ export const Navigation: React.FC<NavigationProps> = ({
 }) => {
   return (
     <nav className={`flex justify-between mt-3 mb-20 ${className}`}>
-      <div className="flex flex-col ml-10">
+      <div className="flex flex-col ml-10 text-left">
         {leftLinks.map((link) => (
           <NavLinkComponent
             key={link.label}

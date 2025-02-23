@@ -2,6 +2,7 @@
 import { Inter } from "next/font/google";
 import { useRef } from "react";
 import { HeroSection } from "./components/HeroSection/HeroSection";
+import { HeroContent } from "./components/HeroSection/types";
 import Biography from "./components/Biography/Biography";
 
 export default function Home() {
@@ -16,11 +17,12 @@ export default function Home() {
       });
     }
   };
-  const heroContent = {
+
+  const heroContent: HeroContent = {
     navigationLinks: {
       leftLinks: [
+        { href: "#", label: '"Home"' },
         { href: "#", label: '"Portfolio"' },
-        { href: "#", label: '"Resume"' },
         { href: "#", label: '"Inquiries"' },
       ],
       rightLink: {
@@ -35,15 +37,17 @@ export default function Home() {
       subQuote:
         "[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim]",
     },
-    locationInfo: {
-      location: "[Location/coordinates]",
-      datetime: "[MM/DD/YYYY][00:00]",
+    scrollOptions: {
+      text: "Scroll",
+      href: "#biography",
+      onClick: scrollToBiography,
     },
   };
+
   return (
     <div className="min-h-screen flex flex-col">
-      <HeroSection {...heroContent} onScroll={scrollToBiography} />
-      <Biography biographyRef={biographyRef}></Biography>
+      <HeroSection content={heroContent} />
+      <Biography biographyRef={biographyRef} />
     </div>
   );
 }
