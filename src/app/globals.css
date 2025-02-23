@@ -13,6 +13,7 @@
 .custom-cursor {
   cursor: none;
   position: fixed;
+  size: 10px;
   pointer-events: none; /* Ensures the cursor doesn't interfere with clicking */
   z-index: 50; /* Keep it above other elements */
 }
