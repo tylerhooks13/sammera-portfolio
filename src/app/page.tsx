@@ -33,9 +33,9 @@ export default function Home() {
     },
     quoteContent: {
       mainQuote:
-        '"insert quote here; Lorem ipsum dolor sit amet, consectetur adipiscin"',
+        "“Any form of art is a form of power; it has impact, it can affect change.”",
       subQuote:
-        "[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim]",
+        "--Ossie Davis, Ossie Davis A Life in Black Theater, Film, and Television",
     },
     scrollOptions: {
       text: "Scroll",
