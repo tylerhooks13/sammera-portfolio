@@ -14,11 +14,9 @@ const inter = Inter({
 });
 
 // VideoText component with direct SVG mask
-const VideoText = ({ text }: { text: string }) => {
-  // Generate a unique ID for each mask to avoid conflicts
-  const [uniqueId] = useState(
-    `mask-${Math.random().toString(36).substring(2, 9)}`
-  );
+const VideoText = ({ text, index }: { text: string; index: number }) => {
+  // Use a stable ID based on the word and its position
+  const uniqueId = `mask-${text}-${index}`;
 
   return (
     <span className="inline-block relative">
@@ -41,7 +39,7 @@ const VideoText = ({ text }: { text: string }) => {
               fontSize="40"
               fontWeight="bold"
               fontFamily="Inter, sans-serif"
-              style={{ textTransform: "uppercase" }}
+              style={{ textTransform: "uppercase", letterSpacing: "-0.05em" }}
             >
               {text}
             </text>
@@ -99,10 +97,10 @@ const Quote: React.FC<{ content: QuoteContent }> = ({ content }) => {
       {/* Main quote as normal paragraph text */}
       <div className="w-full max-w-4xl mx-auto px-4 mb-7">
         <h1
-          className={`${inter.className} text-center text-3xl md:text-4xl lg:text-9xl leading-tight md:leading-snug font-semibold tracking-tight`}
+          className={`${inter.className} text-center text-3xl md:text-4xl lg:text-9xl leading-tight md:leading-snug font-semibold tracking-tighter`}
         >
           {words.map((word, index) => (
-            <VideoText key={index} text={word} />
+            <VideoText key={index} text={word} index={index} />
           ))}
         </h1>
       </div>
