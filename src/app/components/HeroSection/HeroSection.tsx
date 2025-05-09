@@ -13,104 +13,96 @@ const inter = Inter({
   style: ["normal", "italic"],
 });
 
-// VideoText component with direct SVG mask
-const VideoText = ({ text, index }: { text: string; index: number }) => {
-  // Use a stable ID based on the word and its position
-  const uniqueId = `mask-${text}-${index}`;
-
-  return (
-    <span className="inline-block relative">
-      <svg
-        width={`${text.length * 0.55}em`}
-        viewBox={`0 0 ${text.length * 30} 60`}
-        preserveAspectRatio="xMidYMid meet"
-        className="inline align-middle"
-        style={{ margin: "0 0.02em" }}
-      >
-        <defs>
-          <mask id={uniqueId}>
-            <rect width="100%" height="100%" fill="black" />
-            <text
-              x="50%"
-              y="50%"
-              dominantBaseline="middle"
-              textAnchor="middle"
-              fill="white"
-              fontSize="40"
-              fontWeight="bold"
-              fontFamily="Inter, sans-serif"
-              style={{ textTransform: "uppercase", letterSpacing: "-0.05em" }}
-            >
-              {text}
-            </text>
-          </mask>
-        </defs>
-
-        <g mask={`url(#${uniqueId})`}>
-          <foreignObject width="100%" height="100%">
-            <div className="w-full h-full" style={{ overflow: "hidden" }}>
-              <video
-                autoPlay
-                muted
-                playsInline
-                loop
-                className="w-full h-full object-cover"
-              >
-                <source src="/video.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </foreignObject>
-        </g>
-      </svg>
-    </span>
-  );
-};
-
-// Quote component as a regular paragraph of text
+// Component for the multi-media hero section
 const Quote: React.FC<{ content: QuoteContent }> = ({ content }) => {
   const [mounted, setMounted] = useState(false);
 
-  // Simple effect to handle client-side mounting
+  // Handle client-side mounting
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // During SSR, return minimal component
-  if (!mounted) {
-    return (
-      <div className="flex-1 flex flex-col items-center justify-center">
-        <div className="mb-7 px-4 w-full"></div>
-        <h3
-          className={`${inter.className} italic text-center text-md mb-7 w-3/5`}
-        >
-          {content.subQuote}
-        </h3>
-      </div>
-    );
-  }
-
-  // Process the quote text on client side
-  const words = content.mainQuote.split(" ");
-
   return (
     <div className="flex-1 flex flex-col items-center justify-center">
-      {/* Main quote as normal paragraph text */}
-      <div className="w-full max-w-4xl mx-auto px-4 mb-7">
-        <h1
-          className={`${inter.className} text-center text-3xl md:text-4xl lg:text-9xl leading-tight md:leading-snug font-semibold tracking-tighter`}
-        >
-          {words.map((word, index) => (
-            <VideoText key={index} text={word} index={index} />
-          ))}
-        </h1>
-      </div>
+      {/* Main container for the layout */}
+      <div className="w-full max-w-5xl mx-auto relative">
+        {/* Media elements - positioned absolutely to overlap appropriately */}
 
-      {/* Sub Quote */}
-      <h3
-        className={`${inter.className} italic text-center text-md mb-7 w-3/5`}
-      >
-        {content.subQuote}
-      </h3>
+        {/* OLD FILM VIDEO - left side */}
+        <div className="absolute left-0 top-0 w-[320px] h-[180px] bg-grey overflow-hidden z-10">
+          <div className="absolute inset-0 flex items-center justify-center text-gray-600 text-xs">
+            OLD FILM VIDEO
+          </div>
+          {mounted && (
+            <iframe
+              className="absolute top-0 left-0 w-full h-full object-cover opacity-80"
+              src="https://www.youtube.com/embed/BzvZh3wwp4I?autoplay=1&mute=1&controls=0&loop=1&playlist=BzvZh3wwp4I&showinfo=0&rel=0&modestbranding=1&start=3&iv_load_policy=3"
+              title="Old Film Video"
+              style={{ border: "none" }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          )}
+        </div>
+
+        {/* VINTAGE PHOTO OF BUILDING/SKETCH - right side */}
+        <div className="absolute right-0 top-0 w-[280px] h-[180px] bg-grey overflow-hidden z-10">
+          <div className="absolute inset-0 flex items-center justify-center text-gray-600 text-xs">
+            VINTAGE PHOTO OF BUILDING/ SKETCH
+          </div>
+          <img
+            src="https://placehold.co/280x180/333333/CCCCCC/?text=Building+Sketch"
+            alt="Vintage building sketch"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* PHOTO OF ARTWORK - left side below */}
+        <div className="absolute left-[100px] bottom-0 w-[240px] h-[160px] bg-grey overflow-hidden z-10">
+          <div className="absolute inset-0 flex items-center justify-center text-gray-600 text-xs">
+            PHOTO OF ARTWORK
+          </div>
+          <img
+            src="https://placehold.co/240x160/333333/CCCCCC/?text=Artwork"
+            alt="Artwork photo"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* FASHION CATWALK VIDEO - right side below */}
+        <div className="absolute right-[50px] bottom-0 w-[380px] h-[180px] bg-grey overflow-hidden z-10">
+          <div className="absolute inset-0 flex items-center justify-center text-gray-600 text-xs">
+            FASHION CATWALK VIDEO
+          </div>
+          {mounted && (
+            <iframe
+              className="absolute top-0 left-0 w-full h-full object-cover opacity-80"
+              src="https://www.youtube.com/embed/1J9QsKRWXLs?autoplay=1&mute=1&controls=0&loop=1&playlist=1J9QsKRWXLs&showinfo=0"
+              title="Fashion Catwalk Video"
+              style={{ border: "none" }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          )}
+        </div>
+
+        {/* Central Text Container - brings text on top of media elements */}
+        <div className="pt-[100px] pb-[100px] px-4 z-20 relative">
+          {/* Main Quote */}
+          <h1
+            className={`${inter.className} text-center text-black text-3xl md:text-4xl lg:text-6xl leading-tight font-semibold tracking-tighter px-4 z-30 relative`}
+          >
+            {content.mainQuote}
+          </h1>
+
+          {/* Sub Quote */}
+          <h3
+            className={`${inter.className} italic text-center text-md mt-12 max-w-2xl mx-auto`}
+          >
+            {content.subQuote}
+          </h3>
+        </div>
+      </div>
     </div>
   );
 };
